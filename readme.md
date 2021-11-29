@@ -14,4 +14,4 @@ https://malakhavam.github.io/JS-code-quiz/
 
 ## Screenshot
 
-![Mockup-image](Assets/images/malakhavam.github.io_JS-code-quiz_.png)
+![Mockup-image](assets/images/malakhavam.github.io_JS-code-quiz_.png)
