@@ -5,7 +5,7 @@ function setTime() {
       secondsLeft--;
       timeEl.textContent = "Time:" + " " + secondsLeft;
       if (secondsLeft === 0) {
-         gameOver()
+         quizOver()
       }
          
     }, 1000);
@@ -26,7 +26,7 @@ var questions = [
 
   {
     q: "Which of the following will write the message “Hello DataFlair!” in an alert box??",
-    ans: ["alertBox(“Hello DataFlair!”);g", 
+    ans: ["alertBox(“Hello DataFlair!”);", 
           "alert(Hello DataFlair!);", 
           "msgAlert(“Hello DataFlair!”);", 
           "alert(“Hello DataFlair!”);"],
@@ -110,6 +110,7 @@ var lost = 0;
   $("#start").on("click", function () {
   $("h1").text("");
   $("h2").text("");
+  $("#quiz-rules").hide()
   $("#start").hide();
   $("#strangeth").hide();
   
@@ -145,7 +146,7 @@ function checkedAnswer() {
     nextQuestion()
    } else {
 
-    gameOver()
+    quizOver()
     secondsLeft === 0
        
    }
@@ -160,19 +161,19 @@ function checkedAnswer() {
   $("<h3>").text(questions[indexQ]["q"]).appendTo("#quiz");
 
  // Buttons with the answers
-  $("<button  class='btn btn-danger qBtn'>")
+  $("<button  class='btn btn-start qBtn'>")
     .text(questions[indexQ].ans[0])
     .appendTo("#quiz")
     .on("click", checkedAnswer);
-  $("<button  class='btn btn-danger qBtn'>")
+  $("<button  class='btn btn-start qBtn'>")
     .text(questions[indexQ].ans[1])
     .appendTo("#quiz")
     .on("click", checkedAnswer);
-  $("<button  class='btn btn-danger qBtn'>")
+  $("<button  class='btn btn-start qBtn'>")
     .text(questions[indexQ].ans[2])
     .appendTo("#quiz")
     .on("click", checkedAnswer);
-  $("<button  class='btn btn-danger qBtn'>")
+  $("<button  class='btn btn-start qBtn'>")
     .text(questions[indexQ].ans[3])
     .appendTo("#quiz")
     .on("click", checkedAnswer);
@@ -180,14 +181,13 @@ function checkedAnswer() {
  }
 
 
-function gameOver(){
+function quizOver(){
     clearInterval(timerInterval)
     $("#quiz").empty()
-    $("#quiz-rules").hide()
-    $("<button id='gameOver' class='btn'>").text("GAME OVER").appendTo("#quiz")
-    $("<p>").text("Please click on the button to save your scores").appendTo("#quiz")
-    
-    $('#gameOver').on('click',function(event){
+    $("<button id='quizOver' class='btn'>").text("QUIZ DONE").appendTo("#quiz")
+    $("<p>").text("Please, click on the button to save your scores").appendTo("#quiz")
+    $("#result").hide()
+    $('#quizOver').on('click',function(event){
     $('#quiz').empty()
     $('<h1>').text("All Done").appendTo('#quiz')
     $('<p id="final_scores">').text('You scored '+ win + ' out of 8').appendTo('#quiz')  
