@@ -7,7 +7,7 @@ function setTime() {
       if (secondsLeft === 0) {
          quizOver()
       }
-         
+
     }, 1000);
 }
 
@@ -112,8 +112,8 @@ var lost = 0;
   $("h2").text("");
   $("#quiz-rules").hide()
   $("#start").hide();
-  $("#strangeth").hide();
   
+
   setTime();
   nextQuestion()
 });
@@ -126,7 +126,7 @@ function checkedAnswer() {
   console.log($(this));
   console.log($(this).text());
 
-  
+
 
   if (questions[indexQ].correct == $(this).text()) {
      console.log(questions[indexQ].correct)
@@ -141,18 +141,18 @@ function checkedAnswer() {
     $("#result").text("WRONG!");
   }
   indexQ ++
-   
-  if( questions.length > indexQ+1){
+
+  if( questions.length > indexQ){
     nextQuestion()
    } else {
 
     quizOver()
     secondsLeft === 0
-       
+
    }
    return win
 }
- 
+
 // Next question function
 
  function nextQuestion(){
@@ -192,13 +192,26 @@ function quizOver(){
     $('<h1>').text("All Done").appendTo('#quiz')
     $('<p id="final_scores">').text('You scored '+ win + ' out of 8').appendTo('#quiz')  
     $('<div class=container style="width: 60%;">').appendTo('#quiz')
-    $('<div class="input-group mb-3">  <input id =submitScores type="text" class="form-control" placeholder="Please enter your initials"  aria-describedby="basic-addon2"> <div class="input-group-append">  <button class="btn btn-outline-secondary" type="button" id="submit">').appendTo('.container')
+    $('<div class="input-group mb-3">  <input id =submitScores type="text" class="form-control" placeholder="Please, enter your initials"  aria-describedby="basic-addon2"> <div class="input-group-append">  <button class="btn btn-outline-secondary" type="button" id="submit">').appendTo('.container')
     $('#submit').text('Submit')
-  })
+    $('#submitscores').empty()
+    console.log("Scores have been submitted")
     
+    var initials =$(this).parent().siblings("input").val() ;
+    var key = win;
+    console.log(initials);
+    console.log(key)
+
+    var newScore ={score:win,name:initials}
+    var highScores = JSON.parse(localStorage.getItem("highScores")) ||[]
+    highScores.push(newScore)
+    localStorage.setItem("highScores",JSON.stringify(highScores))
+    $(this).parent().siblings("input").val("")
+  });
+
   }
 
-    
+
   $('#submit').on("click",function(event){
   $('#submitscores').empty()
   console.log("Scores have been submitted")
@@ -212,4 +225,4 @@ function quizOver(){
   highScores.push(newScore)
   localStorage.setItem("highScores",JSON.stringify(highScores))
   $(this).parent().siblings("input").val("")
-})
+});
