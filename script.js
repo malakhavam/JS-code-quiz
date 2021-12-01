@@ -205,9 +205,10 @@ function quizOver(){
     var newScore ={score:win,name:initials}
     var highScores = JSON.parse(localStorage.getItem("highScores")) ||[]
     highScores.push(newScore)
-    localStorage.setItem("highScores",JSON.stringify(highScores))
+    localStorage.setItem("",JSON.stringify(highScores))
+    window.location.replace("./viewscores.html");
     $(this).parent().siblings("input").val("")
-
+    
       
       
     });
