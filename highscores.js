@@ -3,21 +3,25 @@ var highScore = document.querySelector("#highScores");
 var clear = document.querySelector("#clear");
 var goBack = document.querySelector("#goBack");
 
+
 // Clear all scores 
 clear.addEventListener("click", function () {
     localStorage.clear();
     location.reload();
 });
+
+
 // Retrieve scores from local storage
 var highScores = localStorage.getItem("highScores");
 highScores = JSON.parse(highScores);
+
 
 if (highScores !== null) {
 
     for (var i = 0; i < highScores.length; i++) {
 
         var createLi = document.createElement("li");
-        createLi.textContent = highScores[i].initials + " " + highScores[i].score;
+        createLi.textContent = highScores[i].score + " " + highScores[i].name;
         highScore.appendChild(createLi);
 
     }

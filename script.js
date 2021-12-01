@@ -194,8 +194,9 @@ function quizOver(){
     $('<div class=container style="width: 60%;">').appendTo('#quiz')
     $('<div class="input-group mb-3">  <input id =submitScores type="text" class="form-control" placeholder="Please, enter your initials"  aria-describedby="basic-addon2"> <div class="input-group-append">  <button class="btn btn-outline-secondary" type="button" id="submit">').appendTo('.container')
     $('#submit').on("click",function(eventIn){
-      $('#submitscores').empty()
-      
+    
+
+      console.log("Scores have been submitted")       
       var initials =$(this).parent().siblings("input").val() ;
       var key = win;
       console.log(initials);
@@ -205,17 +206,17 @@ function quizOver(){
     var newScore ={score:win,name:initials}
     var highScores = JSON.parse(localStorage.getItem("highScores")) ||[]
     highScores.push(newScore)
-    localStorage.setItem("",JSON.stringify(highScores))
+    localStorage.setItem("highScores",JSON.stringify(highScores))
+ // moving to high scores page   
     window.location.replace("./viewscores.html");
     $(this).parent().siblings("input").val("")
     
       
       
     });
+
     $('#submit').text('Submit')
-    $('#submit').on('Submit')
-    $('#submitscores').empty()
-    console.log("Scores have been submitted")
+    
     
     
   });
